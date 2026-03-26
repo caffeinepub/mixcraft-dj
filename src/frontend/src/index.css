@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+    --background: 0.09 0.01 240;
+    --foreground: 0.93 0.015 235;
+    --card: 0.13 0.015 240;
+    --card-foreground: 0.93 0.015 235;
+    --popover: 0.16 0.018 240;
+    --popover-foreground: 0.93 0.015 235;
+    --primary: 0.87 0.14 200;
+    --primary-foreground: 0.09 0.01 240;
+    --secondary: 0.2 0.022 240;
+    --secondary-foreground: 0.93 0.015 235;
+    --muted: 0.18 0.018 240;
+    --muted-foreground: 0.68 0.02 230;
+    --accent: 0.62 0.23 350;
+    --accent-foreground: 0.93 0.015 235;
+    --destructive: 0.62 0.23 350;
+    --destructive-foreground: 0.93 0.015 235;
+    --border: 0.22 0.025 240;
+    --input: 0.22 0.025 240;
+    --ring: 0.87 0.14 200;
+    --chart-1: 0.87 0.14 200;
+    --chart-2: 0.62 0.23 350;
+    --chart-3: 0.55 0.22 295;
+    --chart-4: 0.69 0.19 152;
+    --chart-5: 0.82 0.15 80;
+    --sidebar: 0.13 0.015 240;
+    --sidebar-foreground: 0.93 0.015 235;
+    --sidebar-primary: 0.87 0.14 200;
+    --sidebar-primary-foreground: 0.09 0.01 240;
+    --sidebar-accent: 0.2 0.022 240;
+    --sidebar-accent-foreground: 0.93 0.015 235;
+    --sidebar-border: 0.22 0.025 240;
+    --sidebar-ring: 0.87 0.14 200;
+    --deck-a: #28e6ff;
+    --deck-b: #ff3b8a;
+    --dj-purple: #8b5cf6;
+    --dj-green: #22c55e;
+    --dj-amber: #f5c542;
+    --dj-bg: #0b0d12;
+    --dj-card: #121722;
+    --dj-border: #242b3a;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0b0d12;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #242b3a;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2a3242;
+  }
+}
+
+@layer utilities {
+  .neon-a {
+    box-shadow: 0 0 12px 2px rgba(40, 230, 255, 0.5);
+  }
+  .neon-b {
+    box-shadow: 0 0 12px 2px rgba(255, 59, 138, 0.5);
+  }
+  .neon-purple {
+    box-shadow: 0 0 12px 2px rgba(139, 92, 246, 0.5);
+  }
+  .neon-green {
+    box-shadow: 0 0 10px 2px rgba(34, 197, 94, 0.5);
+  }
+  .neon-amber {
+    box-shadow: 0 0 10px 2px rgba(245, 197, 66, 0.5);
+  }
+  .neon-ring-a {
+    box-shadow: 0 0 0 2px var(--deck-a), 0 0 20px 4px rgba(40, 230, 255, 0.4);
+  }
+  .neon-ring-b {
+    box-shadow: 0 0 0 2px var(--deck-b), 0 0 20px 4px rgba(255, 59, 138, 0.4);
+  }
+  .neon-text-a {
+    color: var(--deck-a);
+    text-shadow: 0 0 8px rgba(40, 230, 255, 0.6);
+  }
+  .neon-text-b {
+    color: var(--deck-b);
+    text-shadow: 0 0 8px rgba(255, 59, 138, 0.6);
+  }
+  .dj-card {
+    background: #121722;
+    border: 1px solid #242b3a;
+    border-radius: 0.75rem;
+  }
+}
+
+@keyframes vinylSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.vinyl-spin {
+  animation: vinylSpin 2s linear infinite;
+  animation-play-state: paused;
+}
+
+.vinyl-spin.playing {
+  animation-play-state: running;
+}
