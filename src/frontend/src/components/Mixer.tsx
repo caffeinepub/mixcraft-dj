@@ -1,4 +1,5 @@
 import { Headphones, Pause, Play, RotateCcw, Timer, Zap } from "lucide-react";
+import { useState } from "react";
 import { usePerDeckOutputRouting } from "../hooks/usePerDeckOutputRouting";
 import type { DeckHookResult } from "../types/audio";
 import { EQKnob } from "./EQKnob";
@@ -46,10 +47,10 @@ function PerDeckAudioRouting() {
         onClick={requestPermission}
         className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded text-[9px] font-black uppercase tracking-wider transition-all active:scale-95 border"
         style={{
-          background: "rgba(40, 230, 255, 0.08)",
-          borderColor: "rgba(40, 230, 255, 0.5)",
-          color: "#28E6FF",
-          boxShadow: "0 0 8px rgba(40,230,255,0.15)",
+          background: "rgba(255, 215, 0, 0.08)",
+          borderColor: "rgba(255, 215, 0, 0.5)",
+          color: "#FFD700",
+          boxShadow: "0 0 8px rgba(255,215,0,0.15)",
         }}
         data-ocid="mixer.primary_button"
       >
@@ -81,7 +82,7 @@ function PerDeckAudioRouting() {
       <div className="flex flex-col gap-1 flex-1">
         <span
           className="text-[8px] uppercase tracking-wider text-center font-black"
-          style={{ color: "#28E6FF" }}
+          style={{ color: "#FFD700" }}
         >
           DECK A OUTPUT
         </span>
@@ -90,8 +91,8 @@ function PerDeckAudioRouting() {
           onChange={(e) => selectDeviceA(e.target.value)}
           className="w-full rounded py-1 px-1.5 text-[10px] cursor-pointer outline-none"
           style={{
-            background: "#1a2030",
-            border: "1px solid rgba(40, 230, 255, 0.4)",
+            background: "#1a1000",
+            border: "1px solid rgba(255, 215, 0, 0.4)",
             color: "#c8d0e0",
           }}
           data-ocid="mixer.select"
@@ -117,7 +118,7 @@ function PerDeckAudioRouting() {
           onChange={(e) => selectDeviceB(e.target.value)}
           className="w-full rounded py-1 px-1.5 text-[10px] cursor-pointer outline-none"
           style={{
-            background: "#1a2030",
+            background: "#1a1000",
             border: "1px solid rgba(255, 59, 138, 0.4)",
             color: "#c8d0e0",
           }}
@@ -151,6 +152,69 @@ export function Mixer({
   const stateA = deckA.state;
   const stateB = deckB.state;
 
+  const [syncGlow, setSyncGlow] = useState(false);
+  const [revertGlow, setRevertGlow] = useState(false);
+
+  const handleSyncBothWithGlow = () => {
+    onSyncBoth();
+    setSyncGlow(true);
+    setTimeout(() => setSyncGlow(false), 2000);
+  };
+
+  const handleRevertWithGlow = () => {
+    onRevertDefault();
+    setRevertGlow(true);
+    setTimeout(() => setRevertGlow(false), 2000);
+  };
+
+  // Active states
+  const playAllActive = stateA.isPlaying && stateB.isPlaying;
+  const pauseAllActive = !stateA.isPlaying && !stateB.isPlaying;
+
+  const playAllStyle = {
+    background: playAllActive
+      ? "rgba(34, 197, 94, 0.25)"
+      : "rgba(34, 197, 94, 0.08)",
+    borderColor: "#22C55E",
+    color: "#22C55E",
+    boxShadow: playAllActive
+      ? "0 0 20px rgba(34,197,94,0.8), 0 0 40px rgba(34,197,94,0.4), inset 0 0 10px rgba(34,197,94,0.1)"
+      : "0 0 6px rgba(34,197,94,0.2)",
+  };
+
+  const pauseAllStyle = {
+    background: pauseAllActive
+      ? "rgba(251, 191, 36, 0.25)"
+      : "rgba(251, 191, 36, 0.08)",
+    borderColor: "#FBBF24",
+    color: "#FBBF24",
+    boxShadow: pauseAllActive
+      ? "0 0 20px rgba(251,191,36,0.8), 0 0 40px rgba(251,191,36,0.4), inset 0 0 10px rgba(251,191,36,0.1)"
+      : "0 0 6px rgba(251,191,36,0.2)",
+  };
+
+  const syncBothStyle = {
+    background: syncGlow
+      ? "rgba(40, 230, 255, 0.25)"
+      : "rgba(40, 230, 255, 0.08)",
+    borderColor: "#28E6FF",
+    color: "#28E6FF",
+    boxShadow: syncGlow
+      ? "0 0 20px rgba(40,230,255,0.8), 0 0 40px rgba(40,230,255,0.4), inset 0 0 10px rgba(40,230,255,0.1)"
+      : "0 0 6px rgba(40,230,255,0.2)",
+  };
+
+  const revertStyle = {
+    background: revertGlow
+      ? "rgba(255, 59, 138, 0.25)"
+      : "rgba(255, 59, 138, 0.08)",
+    borderColor: "#FF3B8A",
+    color: "#FF3B8A",
+    boxShadow: revertGlow
+      ? "0 0 20px rgba(255,59,138,0.8), 0 0 40px rgba(255,59,138,0.4), inset 0 0 10px rgba(255,59,138,0.1)"
+      : "0 0 6px rgba(255,59,138,0.2)",
+  };
+
   return (
     <div
       className="dj-card flex flex-col gap-3 p-3 h-full"
@@ -168,12 +232,7 @@ export function Mixer({
           type="button"
           onClick={onPlayAll}
           className="flex items-center justify-center gap-1 py-1.5 rounded text-[9px] font-black uppercase tracking-wider transition-all active:scale-95 border"
-          style={{
-            background: "rgba(34, 197, 94, 0.12)",
-            borderColor: "#22C55E",
-            color: "#22C55E",
-            boxShadow: "0 0 8px rgba(34,197,94,0.25)",
-          }}
+          style={playAllStyle}
           data-ocid="mixer.primary_button"
         >
           <Play size={9} />
@@ -184,12 +243,7 @@ export function Mixer({
           type="button"
           onClick={onPauseAll}
           className="flex items-center justify-center gap-1 py-1.5 rounded text-[9px] font-black uppercase tracking-wider transition-all active:scale-95 border"
-          style={{
-            background: "rgba(251, 191, 36, 0.12)",
-            borderColor: "#FBBF24",
-            color: "#FBBF24",
-            boxShadow: "0 0 8px rgba(251,191,36,0.25)",
-          }}
+          style={pauseAllStyle}
           data-ocid="mixer.secondary_button"
         >
           <Pause size={9} />
@@ -198,14 +252,9 @@ export function Mixer({
 
         <button
           type="button"
-          onClick={onSyncBoth}
+          onClick={handleSyncBothWithGlow}
           className="flex items-center justify-center gap-1 py-1.5 rounded text-[9px] font-black uppercase tracking-wider transition-all active:scale-95 border"
-          style={{
-            background: "rgba(40, 230, 255, 0.12)",
-            borderColor: "#28E6FF",
-            color: "#28E6FF",
-            boxShadow: "0 0 8px rgba(40,230,255,0.25)",
-          }}
+          style={syncBothStyle}
           data-ocid="mixer.toggle"
         >
           <Timer size={9} />
@@ -214,14 +263,9 @@ export function Mixer({
 
         <button
           type="button"
-          onClick={onRevertDefault}
+          onClick={handleRevertWithGlow}
           className="flex items-center justify-center gap-1 py-1.5 rounded text-[9px] font-black uppercase tracking-wider transition-all active:scale-95 border"
-          style={{
-            background: "rgba(255, 59, 138, 0.12)",
-            borderColor: "#FF3B8A",
-            color: "#FF3B8A",
-            boxShadow: "0 0 8px rgba(255,59,138,0.25)",
-          }}
+          style={revertStyle}
           data-ocid="mixer.delete_button"
         >
           <RotateCcw size={9} />
@@ -232,10 +276,16 @@ export function Mixer({
       {/* BPM Row */}
       <div className="flex items-center justify-between gap-2">
         <div className="text-center flex-1">
-          <div className="text-[9px] uppercase tracking-wider text-deck-a mb-0.5">
+          <div
+            className="text-[9px] uppercase tracking-wider mb-0.5"
+            style={{ color: "#FFD700" }}
+          >
             DECK A
           </div>
-          <div className="text-xl font-black font-mono text-deck-a">
+          <div
+            className="text-xl font-black font-mono"
+            style={{ color: "#FFD700" }}
+          >
             {stateA.bpm?.toFixed(1) ?? "--.-"}
           </div>
           <div className="text-[8px] text-dj-muted">BPM</div>
@@ -288,7 +338,10 @@ export function Mixer({
 
       {/* EQ - Deck A */}
       <div className="border-t border-dj-border pt-2">
-        <div className="text-[8px] uppercase tracking-wider text-deck-a text-center mb-2">
+        <div
+          className="text-[8px] uppercase tracking-wider text-center mb-2"
+          style={{ color: "#FFD700" }}
+        >
           EQ — A
         </div>
         <div className="flex justify-around">
@@ -296,21 +349,21 @@ export function Mixer({
             value={stateA.eq.high}
             onChange={(v) => deckA.actions.setEQ("high", v)}
             label="HI"
-            color="#28E6FF"
+            color="#FFD700"
             size={40}
           />
           <EQKnob
             value={stateA.eq.mid}
             onChange={(v) => deckA.actions.setEQ("mid", v)}
             label="MID"
-            color="#28E6FF"
+            color="#FFD700"
             size={40}
           />
           <EQKnob
             value={stateA.eq.low}
             onChange={(v) => deckA.actions.setEQ("low", v)}
             label="LOW"
-            color="#28E6FF"
+            color="#FFD700"
             size={40}
           />
         </div>
@@ -319,7 +372,10 @@ export function Mixer({
       {/* Channel faders */}
       <div className="flex justify-around gap-4">
         <div className="flex flex-col items-center gap-1">
-          <span className="text-[8px] uppercase tracking-wider text-deck-a">
+          <span
+            className="text-[8px] uppercase tracking-wider"
+            style={{ color: "#FFD700" }}
+          >
             A
           </span>
           <input
@@ -335,7 +391,7 @@ export function Mixer({
             style={{
               writingMode: "vertical-lr",
               direction: "rtl",
-              accentColor: "#28E6FF",
+              accentColor: "#FFD700",
             }}
             data-ocid="mixer.toggle"
           />
@@ -397,7 +453,7 @@ export function Mixer({
       {/* Crossfader */}
       <div className="flex flex-col gap-1 border-t border-dj-border pt-2">
         <div className="flex justify-between text-[8px] uppercase tracking-wider">
-          <span className="text-deck-a">A</span>
+          <span style={{ color: "#FFD700" }}>A</span>
           <span className="text-dj-muted">CROSSFADER</span>
           <span className="text-deck-b">B</span>
         </div>

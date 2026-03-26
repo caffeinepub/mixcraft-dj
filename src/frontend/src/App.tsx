@@ -1,5 +1,5 @@
 import { Toaster } from "@/components/ui/sonner";
-import { Disc3, Github, Radio } from "lucide-react";
+import { Disc3, Radio } from "lucide-react";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -38,7 +38,7 @@ function WaveformOverview() {
   return (
     <div
       className="w-full h-12 rounded overflow-hidden relative"
-      style={{ background: "#0d1320" }}
+      style={{ background: "#0d0d00" }}
     >
       <svg
         width="100%"
@@ -55,7 +55,7 @@ function WaveformOverview() {
             y={`${(100 - bar.h) / 2}%`}
             width="0.5%"
             height={`${bar.h}%`}
-            fill={`rgba(40, 230, 255, ${bar.opacity})`}
+            fill={`rgba(255, 215, 0, ${bar.opacity})`}
           />
         ))}
         {RIGHT_BARS.map((bar) => (
@@ -73,7 +73,7 @@ function WaveformOverview() {
           y1="0"
           x2="50%"
           y2="100%"
-          stroke="#242B3A"
+          stroke="#2a2000"
           strokeWidth="1"
         />
       </svg>
@@ -237,14 +237,14 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen" style={{ background: "#0B0D12" }}>
+    <div className="min-h-screen" style={{ background: "#000000" }}>
       <Toaster position="top-right" theme="dark" />
 
       {/* Header */}
       <header
         className="sticky top-0 z-50 border-b border-dj-border px-6 py-3"
         style={{
-          background: "rgba(11, 13, 18, 0.95)",
+          background: "rgba(0,0,0,0.95)",
           backdropFilter: "blur(12px)",
         }}
         data-ocid="app.panel"
@@ -254,8 +254,8 @@ export default function App() {
             <div
               className="w-9 h-9 rounded-full flex items-center justify-center"
               style={{
-                background: "linear-gradient(135deg, #28E6FF, #8B5CF6)",
-                boxShadow: "0 0 12px rgba(40, 230, 255, 0.4)",
+                background: "linear-gradient(135deg, #FFD700, #FF8C00)",
+                boxShadow: "0 0 12px rgba(255, 215, 0, 0.4)",
               }}
             >
               <Disc3 size={18} className="text-black" />
@@ -270,17 +270,188 @@ export default function App() {
             </div>
           </div>
 
-          <nav className="hidden md:flex items-center gap-6">
-            {["Decks", "Mixer", "Library", "Effects"].map((link) => (
-              <span
-                key={link}
-                className="text-xs uppercase tracking-wider text-dj-muted hover:text-dj-text transition-colors cursor-pointer"
-                data-ocid="app.link"
-              >
-                {link}
-              </span>
-            ))}
-          </nav>
+          {/* RISE OF THE DJ heading */}
+          <div
+            className="hidden md:flex items-center gap-0"
+            style={{ fontFamily: "'Bungee', cursive" }}
+          >
+            <span
+              key="ch0"
+              style={{
+                color: "#FFD700",
+                fontSize: "1.4rem",
+                letterSpacing: "0.02em",
+                textShadow:
+                  "0 0 10px rgba(255,215,0,0.7), 0 0 20px rgba(255,215,0,0.4)",
+                display: "inline-block",
+              }}
+            >
+              R
+            </span>
+            <span
+              key="ch1"
+              style={{
+                color: "#ffffff",
+                fontSize: "1.4rem",
+                letterSpacing: "0.02em",
+                textShadow:
+                  "0 0 10px rgba(255,215,0,0.7), 0 0 20px rgba(255,215,0,0.4)",
+                display: "inline-block",
+              }}
+            >
+              I
+            </span>
+            <span
+              key="ch2"
+              style={{
+                color: "#FFD700",
+                fontSize: "1.4rem",
+                letterSpacing: "0.02em",
+                textShadow:
+                  "0 0 10px rgba(255,215,0,0.7), 0 0 20px rgba(255,215,0,0.4)",
+                display: "inline-block",
+              }}
+            >
+              S
+            </span>
+            <span
+              key="ch3"
+              style={{
+                color: "#ffffff",
+                fontSize: "1.4rem",
+                letterSpacing: "0.02em",
+                textShadow:
+                  "0 0 10px rgba(255,215,0,0.7), 0 0 20px rgba(255,215,0,0.4)",
+                display: "inline-block",
+              }}
+            >
+              E
+            </span>
+            <span
+              key="ch4"
+              style={{
+                color: "transparent",
+                fontSize: "1.4rem",
+                display: "inline-block",
+                minWidth: "0.4em",
+              }}
+            >
+              {" "}
+            </span>
+            <span
+              key="ch5"
+              style={{
+                color: "#ffffff",
+                fontSize: "1.4rem",
+                letterSpacing: "0.02em",
+                textShadow:
+                  "0 0 10px rgba(255,215,0,0.7), 0 0 20px rgba(255,215,0,0.4)",
+                display: "inline-block",
+              }}
+            >
+              O
+            </span>
+            <span
+              key="ch6"
+              style={{
+                color: "#FFD700",
+                fontSize: "1.4rem",
+                letterSpacing: "0.02em",
+                textShadow:
+                  "0 0 10px rgba(255,215,0,0.7), 0 0 20px rgba(255,215,0,0.4)",
+                display: "inline-block",
+              }}
+            >
+              F
+            </span>
+            <span
+              key="ch7"
+              style={{
+                color: "transparent",
+                fontSize: "1.4rem",
+                display: "inline-block",
+                minWidth: "0.4em",
+              }}
+            >
+              {" "}
+            </span>
+            <span
+              key="ch8"
+              style={{
+                color: "#FFD700",
+                fontSize: "1.4rem",
+                letterSpacing: "0.02em",
+                textShadow:
+                  "0 0 10px rgba(255,215,0,0.7), 0 0 20px rgba(255,215,0,0.4)",
+                display: "inline-block",
+              }}
+            >
+              T
+            </span>
+            <span
+              key="ch9"
+              style={{
+                color: "#ffffff",
+                fontSize: "1.4rem",
+                letterSpacing: "0.02em",
+                textShadow:
+                  "0 0 10px rgba(255,215,0,0.7), 0 0 20px rgba(255,215,0,0.4)",
+                display: "inline-block",
+              }}
+            >
+              H
+            </span>
+            <span
+              key="ch10"
+              style={{
+                color: "#FFD700",
+                fontSize: "1.4rem",
+                letterSpacing: "0.02em",
+                textShadow:
+                  "0 0 10px rgba(255,215,0,0.7), 0 0 20px rgba(255,215,0,0.4)",
+                display: "inline-block",
+              }}
+            >
+              E
+            </span>
+            <span
+              key="ch11"
+              style={{
+                color: "transparent",
+                fontSize: "1.4rem",
+                display: "inline-block",
+                minWidth: "0.4em",
+              }}
+            >
+              {" "}
+            </span>
+            <span
+              key="ch12"
+              style={{
+                color: "#FFD700",
+                fontSize: "1.4rem",
+                letterSpacing: "0.02em",
+                textShadow:
+                  "0 0 10px rgba(255,215,0,0.7), 0 0 20px rgba(255,215,0,0.4)",
+                display: "inline-block",
+              }}
+            >
+              D
+            </span>
+            <span
+              key="ch13"
+              style={{
+                color: "#ffffff",
+                fontSize: "1.4rem",
+                letterSpacing: "0.02em",
+                textShadow:
+                  "0 0 10px rgba(255,215,0,0.7), 0 0 20px rgba(255,215,0,0.4)",
+                display: "inline-block",
+              }}
+            >
+              J
+            </span>
+          </div>
 
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1 text-[10px] text-dj-muted">
@@ -301,28 +472,55 @@ export default function App() {
           <WaveformOverview />
         </motion.div>
 
+        {/* Decks + Mixer with wallpaper background */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="grid grid-cols-[1fr_220px_1fr] gap-3 mb-4"
+          className="grid grid-cols-[1fr_220px_1fr] gap-3 mb-4 relative rounded-xl overflow-hidden"
+          style={{
+            backgroundImage:
+              "url(/assets/uploads/wallpaper-019d2841-5fe3-77da-9662-1d81d2e66477-1.jpg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            padding: "12px",
+          }}
         >
-          <DeckA deck={deckA} onLoadFile={handleLoadFile} ytTrack={ytTrackA} />
-          <Mixer
-            deckA={deckA}
-            deckB={deckB}
-            crossfaderPos={engine.crossfaderPos}
-            setCrossfader={engine.setCrossfader}
-            isRecording={engine.isRecording}
-            startRecording={engine.startRecording}
-            stopRecording={engine.stopRecording}
-            onSync={handleSync}
-            onPlayAll={handlePlayAll}
-            onPauseAll={handlePauseAll}
-            onSyncBoth={handleSyncBoth}
-            onRevertDefault={handleRevertDefault}
+          {/* Dark overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{ background: "rgba(0,0,0,0.65)", zIndex: 0 }}
           />
-          <DeckB deck={deckB} onLoadFile={handleLoadFile} ytTrack={ytTrackB} />
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <DeckA
+              deck={deckA}
+              onLoadFile={handleLoadFile}
+              ytTrack={ytTrackA}
+            />
+          </div>
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <Mixer
+              deckA={deckA}
+              deckB={deckB}
+              crossfaderPos={engine.crossfaderPos}
+              setCrossfader={engine.setCrossfader}
+              isRecording={engine.isRecording}
+              startRecording={engine.startRecording}
+              stopRecording={engine.stopRecording}
+              onSync={handleSync}
+              onPlayAll={handlePlayAll}
+              onPauseAll={handlePauseAll}
+              onSyncBoth={handleSyncBoth}
+              onRevertDefault={handleRevertDefault}
+            />
+          </div>
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <DeckB
+              deck={deckB}
+              onLoadFile={handleLoadFile}
+              ytTrack={ytTrackB}
+            />
+          </div>
         </motion.div>
 
         <motion.div
@@ -366,9 +564,9 @@ export default function App() {
                 <kbd
                   className="px-2 py-0.5 rounded text-[9px] font-mono font-bold"
                   style={{
-                    background: "#1a2030",
-                    color: "#28E6FF",
-                    border: "1px solid #242B3A",
+                    background: "#1a1000",
+                    color: "#FFD700",
+                    border: "1px solid #2a2000",
                   }}
                 >
                   {key}
@@ -386,33 +584,15 @@ export default function App() {
             <div
               className="w-7 h-7 rounded-full flex items-center justify-center"
               style={{
-                background: "linear-gradient(135deg, #28E6FF, #8B5CF6)",
+                background: "linear-gradient(135deg, #FFD700, #FF8C00)",
               }}
             >
               <Disc3 size={14} className="text-black" />
             </div>
             <span className="text-xs text-dj-muted">
-              &copy; {new Date().getFullYear()}{" "}
-              <a
-                href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-dj-text transition-colors"
-              >
-                Built with &hearts; using caffeine.ai
-              </a>
+              &copy; {new Date().getFullYear()} A Quality Product of NEXUS
+              Trading Company, Co-owned by Afaq Mehdi.
             </span>
-          </div>
-          <div className="flex items-center gap-4">
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-dj-muted hover:text-dj-text transition-colors"
-              data-ocid="app.link"
-            >
-              <Github size={16} />
-            </a>
           </div>
         </div>
       </footer>
